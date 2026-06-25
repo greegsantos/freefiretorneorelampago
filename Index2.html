@@ -3,1109 +3,1303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Torneo Relámpago Free Fire - Registro</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Trabalenguas - Expresión Oral</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            --bg: #0a0a0f;
-            --bg-card: rgba(15, 18, 28, 0.88);
-            --fg: #e8e8ef;
-            --muted: #6b7194;
-            --accent: #00e676;
-            --accent-dim: rgba(0, 230, 118, 0.12);
-            --fire-orange: #ff6d00;
-            --fire-red: #ff1744;
-            --border: rgba(0, 230, 118, 0.1);
-            --card-border: rgba(0, 230, 118, 0.18);
+            --bg: #0f0e0c;
+            --bg-card: #1c1a17;
+            --bg-elevated: #262320;
+            --fg: #f0ebe3;
+            --fg-muted: #8a857d;
+            --accent: #ff6b35;
+            --accent-hover: #ff8255;
+            --accent-glow: rgba(255,107,53,0.25);
+            --success: #2dd4a8;
+            --success-dim: #1a3a32;
+            --error: #ff4757;
+            --error-dim: #3a1a1e;
+            --warning: #ffc048;
+            --warning-dim: #3a3018;
+            --border: #33302b;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Rajdhani', sans-serif;
-            background: var(--bg); color: var(--fg);
-            min-height: 100vh; overflow-x: hidden;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
-        #particles-canvas {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0; pointer-events: none;
-        }
-        .cyber-grid {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image:
-                linear-gradient(rgba(0,230,118,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,230,118,0.02) 1px, transparent 1px);
-            background-size: 60px 60px; z-index: 0; pointer-events: none;
-        }
-        .bg-glow {
-            position: fixed; border-radius: 50%; filter: blur(120px);
-            pointer-events: none; z-index: 0;
-        }
-        .bg-glow-1 {
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(0,230,118,0.07), transparent 70%);
-            top: -150px; right: -100px; animation: fG 12s ease-in-out infinite;
-        }
-        .bg-glow-2 {
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(255,109,0,0.05), transparent 70%);
-            bottom: -100px; left: -100px; animation: fG 15s ease-in-out infinite reverse;
-        }
-        @keyframes fG { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(25px,-15px) scale(1.08)} }
-        @keyframes fadeD { from{opacity:0;transform:translateY(-15px)} to{opacity:1;transform:translateY(0)} }
-        @keyframes cardI { from{opacity:0;transform:translateY(30px) scale(0.97)} to{opacity:1;transform:translateY(0) scale(1)} }
-        @keyframes recI { from{opacity:0;transform:translateX(-15px)} to{opacity:1;transform:translateX(0)} }
-        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-        @keyframes shine { 0%{transform:translateX(-100%) rotate(45deg)} 30%,100%{transform:translateX(100%) rotate(45deg)} }
-        @keyframes ovI { from{opacity:0} to{opacity:1} }
-        @keyframes scI { from{opacity:0;transform:translateY(40px) scale(0.9)} to{opacity:1;transform:translateY(0) scale(1)} }
-        @keyframes gSlide { 0%{background-position:0% 0%} 100%{background-position:200% 0%} }
-        @keyframes tI { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
-        @keyframes tO { from{opacity:1;transform:translateX(0)} to{opacity:0;transform:translateX(30px)} }
-        @keyframes spin { to{transform:rotate(360deg)} }
 
-        .main-container {
-            position: relative; z-index: 1; min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center; padding: 2rem 1rem;
-        }
-        .header-badge {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 0.35rem 1rem; border: 1px solid var(--card-border);
-            border-radius: 50px; background: var(--accent-dim);
-            font-size: 0.75rem; font-weight: 600; color: var(--accent);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem;
-            animation: fadeD 0.6s ease-out;
-        }
-        .header-badge .dot {
-            width: 6px; height: 6px; background: var(--accent);
-            border-radius: 50%; animation: blink 1.5s ease-in-out infinite;
-        }
-        .main-title {
-            font-family: 'Orbitron', sans-serif; font-weight: 900;
-            font-size: clamp(1.8rem, 5vw, 3.2rem); text-align: center;
-            line-height: 1.1; margin-bottom: 0.5rem;
-            animation: fadeD 0.7s ease-out 0.1s both;
-        }
-        .main-title .hl {
-            background: linear-gradient(135deg, var(--accent), #69f0ae, var(--fire-orange));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        .subtitle {
-            text-align: center; color: var(--muted); font-size: 1.05rem;
-            font-weight: 500; margin-bottom: 0.3rem;
-            animation: fadeD 0.7s ease-out 0.2s both;
-        }
-        .organizers {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
-            margin-bottom: 1.5rem; animation: fadeD 0.7s ease-out 0.3s both;
-        }
-        .org-tag {
-            padding: 0.25rem 0.75rem; border-radius: 6px;
-            font-size: 0.78rem; font-weight: 600; letter-spacing: 0.5px; border: 1px solid;
-        }
-        .org-tag.rjc { background: rgba(0,230,118,0.08); border-color: rgba(0,230,118,0.25); color: var(--accent); }
-        .org-tag.mdaa { background: rgba(255,109,0,0.08); border-color: rgba(255,109,0,0.25); color: var(--fire-orange); }
+        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
 
-        .counter-bar {
+        /* Fondo animado */
+        .bg-blobs {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+        }
+        .bg-blobs::before, .bg-blobs::after {
+            content: ''; position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.12;
+        }
+        .bg-blobs::before {
+            width: 600px; height: 600px; background: var(--accent);
+            top: -200px; right: -100px;
+            animation: blobFloat 20s ease-in-out infinite alternate;
+        }
+        .bg-blobs::after {
+            width: 500px; height: 500px; background: var(--success);
+            bottom: -200px; left: -100px;
+            animation: blobFloat 25s ease-in-out infinite alternate-reverse;
+        }
+        @keyframes blobFloat {
+            0% { transform: translate(0,0) scale(1); }
+            50% { transform: translate(60px, 40px) scale(1.15); }
+            100% { transform: translate(-40px, 80px) scale(0.95); }
+        }
+
+        /* Pestañas de dificultad */
+        .tab-btn {
+            padding: 10px 24px; border-radius: 100px; font-weight: 600;
+            font-size: 0.9rem; cursor: pointer; transition: all 0.3s;
+            border: 2px solid var(--border); background: transparent; color: var(--fg-muted);
+        }
+        .tab-btn:hover { border-color: var(--fg-muted); color: var(--fg); }
+        .tab-btn.active {
+            background: var(--accent); border-color: var(--accent); color: #fff;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* Tarjetas de trabalenguas */
+        .tw-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 24px; cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+            position: relative; overflow: hidden;
+        }
+        .tw-card::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, var(--accent-glow), transparent);
+            opacity: 0; transition: opacity 0.35s;
+        }
+        .tw-card:hover { border-color: var(--accent); transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+        .tw-card:hover::before { opacity: 1; }
+        .tw-card.selected { border-color: var(--accent); }
+        .tw-card.selected::before { opacity: 1; }
+
+        /* Badge de dificultad */
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+        .badge-facil { background: var(--success-dim); color: var(--success); }
+        .badge-medio { background: var(--warning-dim); color: var(--warning); }
+        .badge-dificil { background: var(--error-dim); color: var(--error); }
+
+        /* Texto del trabalenguas */
+        .tw-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: 700; line-height: 1.5;
+            color: var(--fg);
+        }
+
+        /* Palabras del resultado */
+        .word-chip {
+            display: inline-block; padding: 6px 14px; border-radius: 10px;
+            font-size: 1.1rem; font-weight: 600; margin: 4px;
+            transition: all 0.3s; position: relative;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .word-correct { background: var(--success-dim); color: var(--success); }
+        .word-close { background: var(--warning-dim); color: var(--warning); }
+        .word-wrong { background: var(--error-dim); color: var(--error); }
+        .word-said {
+            display: block; font-size: 0.75rem; font-weight: 400;
+            color: var(--fg-muted); margin-top: 2px;
+        }
+
+        /* Botón de grabar */
+        .rec-btn {
+            width: 100px; height: 100px; border-radius: 50%;
+            background: var(--accent); border: none; cursor: pointer;
             display: flex; align-items: center; justify-content: center;
-            gap: 0.6rem; margin-bottom: 1.8rem;
-            animation: fadeD 0.7s ease-out 0.35s both;
+            color: #fff; font-size: 2rem;
+            transition: all 0.3s; position: relative; z-index: 1;
+            box-shadow: 0 0 0 0 var(--accent-glow);
         }
-        .counter-bar .count {
-            font-family: 'Orbitron', sans-serif; font-weight: 800;
-            font-size: 1.6rem; color: var(--accent);
+        .rec-btn:hover { transform: scale(1.08);
+            box-shadow: 0 0 30px var(--accent-glow); }
+        .rec-btn:active { transform: scale(0.96); }
+        .rec-btn.recording {
+            background: var(--error);
+            animation: recPulse 1.2s ease-in-out infinite;
         }
-        .counter-bar .label { color: var(--muted); font-size: 0.85rem; font-weight: 500; }
+        @keyframes recPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255,71,87,0.5); }
+            50% { box-shadow: 0 0 0 24px rgba(255,71,87,0); }
+        }
 
-        .form-card {
-            width: 100%; max-width: 480px;
-            background: var(--bg-card); border: 1px solid var(--card-border);
-            border-radius: 20px; padding: 2rem 1.8rem;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 60px rgba(0,230,118,0.04), 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03);
-            animation: cardI 0.8s ease-out 0.4s both; position: relative; overflow: hidden;
+        /* Anillos de grabación */
+        .rec-rings { position: absolute; width: 160px; height: 160px; }
+        .rec-ring {
+            position: absolute; inset: 0; border-radius: 50%;
+            border: 2px solid var(--accent); opacity: 0;
         }
-        .form-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), var(--fire-orange), transparent); opacity: 0.7;
+        .recording .rec-ring {
+            animation: ringExpand 2s ease-out infinite;
         }
-        .form-title {
-            font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.15rem;
-            margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem;
+        .recording .rec-ring:nth-child(2) { animation-delay: 0.6s; }
+        .recording .rec-ring:nth-child(3) { animation-delay: 1.2s; }
+        @keyframes ringExpand {
+            0% { transform: scale(0.6); opacity: 0.6; }
+            100% { transform: scale(1.6); opacity: 0; }
         }
-        .form-title i { color: var(--accent); }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-        .form-group { margin-bottom: 1.2rem; }
-        .form-label {
-            display: block; font-size: 0.8rem; font-weight: 600; color: var(--muted);
-            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem;
-        }
-        .form-input {
-            width: 100%; padding: 0.7rem 1rem;
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 10px; color: var(--fg);
-            font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 500;
-            transition: all 0.3s ease; outline: none;
-        }
-        .form-input::placeholder { color: rgba(255,255,255,0.2); }
-        .form-input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-dim), 0 0 20px rgba(0,230,118,0.08);
-            background: rgba(0,230,118,0.02);
-        }
-        .form-input.error { border-color: var(--fire-red); box-shadow: 0 0 0 3px rgba(255,23,68,0.15); }
 
-        .toggle-group {
-            display: flex; background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;
-            overflow: hidden; margin-bottom: 1.2rem;
+        /* Puntuación circular */
+        .score-circle {
+            width: 180px; height: 180px; position: relative;
         }
-        .toggle-option {
-            flex: 1; padding: 0.65rem 0.5rem; text-align: center;
-            font-size: 0.82rem; font-weight: 600; color: var(--muted);
-            cursor: pointer; transition: all 0.3s ease; user-select: none;
-            border: none; background: transparent; font-family: 'Rajdhani', sans-serif;
+        .score-circle svg { transform: rotate(-90deg); }
+        .score-circle .track { fill: none; stroke: var(--border); stroke-width: 8; }
+        .score-circle .progress {
+            fill: none; stroke-width: 8; stroke-linecap: round;
+            transition: stroke-dashoffset 1.5s cubic-bezier(0.4,0,0.2,1),
+                        stroke 0.5s;
         }
-        .toggle-option:hover { color: var(--fg); background: rgba(255,255,255,0.03); }
-        .toggle-option.active { background: var(--accent); color: #0a0a0f; box-shadow: 0 0 20px rgba(0,230,118,0.2); }
+        .score-number {
+            position: absolute; inset: 0; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+        }
+        .score-number .num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem; font-weight: 800; line-height: 1;
+        }
+        .score-number .label { font-size: 0.8rem; color: var(--fg-muted); margin-top: 4px; }
 
-        .cond-field { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease; margin-bottom: 0; }
-        .cond-field.vis { max-height: 120px; opacity: 1; margin-bottom: 1.2rem; }
+        /* Waveform */
+        #waveform-canvas {
+            width: 100%; height: 80px; border-radius: 12px;
+            background: var(--bg-card);
+        }
 
-        .error-msg {
-            font-size: 0.75rem; color: var(--fire-red); margin-top: 0.3rem;
-            display: none; align-items: center; gap: 0.3rem;
+        /* Contador regresivo */
+        .countdown-overlay {
+            position: fixed; inset: 0; z-index: 100;
+            background: rgba(15,14,12,0.9); display: flex;
+            align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s;
         }
-        .error-msg.show { display: flex; }
+        .countdown-overlay.active { opacity: 1; pointer-events: all; }
+        .countdown-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 8rem; font-weight: 800; color: var(--accent);
+            animation: countPop 0.8s cubic-bezier(0.4,0,0.2,1);
+        }
+        @keyframes countPop {
+            0% { transform: scale(2.5); opacity: 0; }
+            40% { transform: scale(0.9); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
 
-        .submit-btn {
-            width: 100%; padding: 0.85rem; border: none; border-radius: 12px;
-            font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.95rem;
-            letter-spacing: 1.5px; cursor: pointer; position: relative; overflow: hidden;
-            background: linear-gradient(135deg, var(--accent), #00c853); color: #0a0a0f;
-            transition: all 0.3s ease; margin-top: 0.5rem;
+        /* Confeti */
+        .confetti-piece {
+            position: fixed; width: 10px; height: 10px; z-index: 200;
+            pointer-events: none;
         }
-        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,230,118,0.3); }
-        .submit-btn:active { transform: translateY(0); }
-        .submit-btn::after {
-            content: ''; position: absolute; top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);
-            animation: shine 3s ease-in-out infinite;
-        }
-        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
 
-        .form-loading {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(10,10,15,0.88); backdrop-filter: blur(4px);
-            display: none; align-items: center; justify-content: center;
-            flex-direction: column; gap: 0.8rem; border-radius: 20px; z-index: 5;
+        /* Toast */
+        .toast-container {
+            position: fixed; top: 24px; right: 24px; z-index: 300;
+            display: flex; flex-direction: column; gap: 8px;
         }
-        .form-loading.vis { display: flex; }
-        .form-loading .spinner {
-            width: 36px; height: 36px; border: 3px solid rgba(0,230,118,0.15);
-            border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite;
-        }
-        .form-loading span { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
-
-        .recent-list { width: 100%; max-width: 480px; margin-top: 1.5rem; animation: cardI 0.8s ease-out 0.6s both; }
-        .recent-title {
-            font-family: 'Orbitron', sans-serif; font-weight: 600; font-size: 0.8rem;
-            color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
-            margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;
-        }
-        .recent-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
-        .recent-item {
-            display: flex; align-items: center; gap: 0.8rem;
-            padding: 0.6rem 1rem; background: var(--bg-card);
-            border: 1px solid var(--border); border-radius: 10px;
-            margin-bottom: 0.4rem; animation: recI 0.4s ease-out; backdrop-filter: blur(10px);
-        }
-        .recent-item .av {
-            width: 34px; height: 34px; border-radius: 8px; background: var(--accent-dim);
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.7rem;
-            color: var(--accent); flex-shrink: 0;
-        }
-        .recent-item .info { flex: 1; min-width: 0; }
-        .recent-item .nm { font-weight: 700; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .recent-item .gid { font-size: 0.75rem; color: var(--muted); }
-        .recent-item .tm { font-size: 0.7rem; color: rgba(255,255,255,0.2); flex-shrink: 0; }
-
-        .success-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
-            z-index: 100; display: none; align-items: center; justify-content: center; padding: 1rem;
-        }
-        .success-overlay.vis { display: flex; animation: ovI 0.4s ease-out; }
-        .success-card {
-            background: var(--bg-card); border: 1px solid var(--card-border);
-            border-radius: 24px; padding: 2.5rem 2rem; text-align: center;
-            max-width: 400px; width: 100%; position: relative; overflow: hidden;
-            animation: scI 0.5s ease-out 0.1s both;
-            box-shadow: 0 0 80px rgba(0,230,118,0.08), 0 30px 80px rgba(0,0,0,0.5);
-        }
-        .success-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--fire-orange), var(--accent));
-            background-size: 200% 100%; animation: gSlide 3s linear infinite;
-        }
-        .s-icon {
-            width: 70px; height: 70px; border-radius: 50%; background: var(--accent-dim);
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 1.2rem; border: 2px solid rgba(0,230,118,0.3);
-        }
-        .s-icon i { font-size: 2rem; color: var(--accent); }
-        .s-title { font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 0.4rem; color: var(--accent); }
-        .s-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.8rem; font-weight: 500; line-height: 1.5; }
-        .wa-btn {
-            display: inline-flex; align-items: center; gap: 0.6rem;
-            padding: 0.9rem 2rem; border-radius: 14px;
-            font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.1rem;
-            text-decoration: none; background: #25d366; color: #fff;
-            transition: all 0.3s ease; border: none; cursor: pointer;
-            box-shadow: 0 4px 20px rgba(37,211,102,0.25);
-        }
-        .wa-btn:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,0.35); }
-        .wa-btn i { font-size: 1.3rem; }
-        .close-m {
-            display: block; margin: 1.5rem auto 0; background: transparent;
-            border: 1px solid rgba(255,255,255,0.08); color: var(--muted);
-            padding: 0.5rem 1.5rem; border-radius: 8px;
-            font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 0.85rem;
-            cursor: pointer; transition: all 0.3s ease;
-        }
-        .close-m:hover { border-color: rgba(255,255,255,0.15); color: var(--fg); }
-
-        .toast-c { position: fixed; top: 1.5rem; right: 1.5rem; z-index: 200; display: flex; flex-direction: column; gap: 0.5rem; }
         .toast {
-            padding: 0.8rem 1.2rem; border-radius: 10px; font-size: 0.85rem; font-weight: 600;
-            display: flex; align-items: center; gap: 0.5rem; animation: tI 0.4s ease-out;
-            backdrop-filter: blur(10px); max-width: 340px;
+            padding: 14px 20px; border-radius: 12px; font-weight: 500;
+            font-size: 0.9rem; display: flex; align-items: center; gap: 10px;
+            animation: toastIn 0.4s cubic-bezier(0.4,0,0.2,1);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
         }
-        .toast.err { background: rgba(255,23,68,0.15); border: 1px solid rgba(255,23,68,0.3); color: #ff5252; }
-        .toast.ok { background: rgba(0,230,118,0.15); border: 1px solid rgba(0,230,118,0.3); color: var(--accent); }
-
-        .admin-link {
-            position: fixed; bottom: 1rem; right: 1rem; z-index: 50;
-            width: 40px; height: 40px; border-radius: 10px;
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: all 0.3s ease; color: rgba(255,255,255,0.12); font-size: 0.9rem;
-        }
-        .admin-link:hover { border-color: var(--card-border); color: var(--muted); background: rgba(255,255,255,0.05); }
-
-        /* ADMIN */
-        .admin-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg); z-index: 300; display: none; flex-direction: column; overflow: hidden;
-        }
-        .admin-overlay.vis { display: flex; animation: ovI 0.3s ease-out; }
-        .admin-header {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
-            background: rgba(10,10,15,0.95); backdrop-filter: blur(10px); flex-shrink: 0;
-        }
-        .admin-header h2 {
-            font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1rem;
-            display: flex; align-items: center; gap: 0.5rem;
-        }
-        .admin-header h2 i { color: var(--fire-orange); }
-        .back-btn {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            color: var(--muted); padding: 0.45rem 1rem; border-radius: 8px;
-            font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 0.85rem;
-            cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.4rem;
-        }
-        .back-btn:hover { border-color: var(--card-border); color: var(--fg); }
-        .admin-body { flex: 1; overflow-y: auto; padding: 1.5rem; }
-
-        .login-box { max-width: 360px; margin: 3rem auto; text-align: center; }
-        .login-box .lock-icon {
-            width: 60px; height: 60px; border-radius: 50%;
-            background: rgba(255,109,0,0.1); border: 1px solid rgba(255,109,0,0.2);
-            display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem;
-        }
-        .login-box .lock-icon i { font-size: 1.5rem; color: var(--fire-orange); }
-        .login-box h3 { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.4rem; }
-        .login-box p { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
-        .login-box input {
-            width: 100%; padding: 0.7rem 1rem; background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;
-            color: var(--fg); font-family: 'Rajdhani', sans-serif; font-size: 1rem;
-            outline: none; text-align: center; letter-spacing: 3px; transition: all 0.3s ease; margin-bottom: 1rem;
-        }
-        .login-box input:focus { border-color: var(--fire-orange); box-shadow: 0 0 0 3px rgba(255,109,0,0.15); }
-        .login-box button {
-            width: 100%; padding: 0.7rem; border: none; border-radius: 10px;
-            font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.85rem;
-            background: var(--fire-orange); color: #fff; cursor: pointer; transition: all 0.3s ease; letter-spacing: 1px;
-        }
-        .login-box button:hover { background: #e65100; box-shadow: 0 4px 20px rgba(255,109,0,0.3); }
-        .login-error { color: var(--fire-red); font-size: 0.8rem; margin-top: 0.5rem; display: none; }
-
-        .admin-dash { display: none; }
-        .admin-dash.vis { display: block; }
-
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.8rem; margin-bottom: 1.5rem; }
-        .stat-card {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 14px; padding: 1rem; text-align: center; backdrop-filter: blur(10px);
-        }
-        .stat-card .stat-num { font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 1.8rem; line-height: 1; }
-        .stat-card .stat-lbl { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-        .stat-card.green .stat-num { color: var(--accent); }
-        .stat-card.orange .stat-num { color: var(--fire-orange); }
-        .stat-card.white .stat-num { color: var(--fg); }
-
-        .config-section {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 14px; padding: 1.2rem; margin-bottom: 1.5rem; backdrop-filter: blur(10px);
-        }
-        .config-section h4 {
-            font-family: 'Orbitron', sans-serif; font-weight: 600; font-size: 0.8rem;
-            margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;
-            color: var(--muted); letter-spacing: 1px; text-transform: uppercase;
-        }
-        .config-row { display: flex; gap: 0.6rem; align-items: center; }
-        .config-row input {
-            flex: 1; padding: 0.55rem 0.8rem; background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
-            color: var(--fg); font-family: 'Rajdhani', sans-serif; font-size: 0.95rem;
-            outline: none; transition: all 0.3s ease;
-        }
-        .config-row input:focus { border-color: var(--fire-orange); box-shadow: 0 0 0 3px rgba(255,109,0,0.1); }
-        .config-row button {
-            padding: 0.55rem 1rem; border: none; border-radius: 8px;
-            background: var(--fire-orange); color: #fff; font-family: 'Rajdhani', sans-serif;
-            font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.3s ease; white-space: nowrap;
-        }
-        .config-row button:hover { background: #e65100; }
-
-        .fs-note {
-            background: rgba(0,230,118,0.05); border: 1px solid rgba(0,230,118,0.12);
-            border-radius: 10px; padding: 0.8rem 1rem; margin-bottom: 1.5rem;
-            font-size: 0.8rem; color: var(--muted); line-height: 1.7;
-        }
-        .fs-note strong { color: var(--accent); }
-        .fs-note i { color: var(--accent); margin-right: 0.3rem; }
-        .fs-note .step {
-            display: flex; align-items: flex-start; gap: 0.5rem; margin-top: 0.5rem;
-        }
-        .fs-note .step-num {
-            background: var(--accent-dim); color: var(--accent); font-weight: 700;
-            font-size: 0.7rem; width: 20px; height: 20px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+        .toast-error { background: var(--error-dim); color: var(--error); border: 1px solid var(--error); }
+        .toast-success { background: var(--success-dim); color: var(--success); border: 1px solid var(--success); }
+        .toast-warning { background: var(--warning-dim); color: var(--warning); border: 1px solid var(--warning); }
+        @keyframes toastIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
-        .search-bar { display: flex; gap: 0.6rem; margin-bottom: 1rem; align-items: center; }
-        .search-wrap { flex: 1; position: relative; }
-        .search-wrap i { position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 0.85rem; pointer-events: none; }
-        .search-wrap input {
-            width: 100%; padding: 0.6rem 1rem 0.6rem 2.3rem; background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;
-            color: var(--fg); font-family: 'Rajdhani', sans-serif; font-size: 0.95rem;
-            outline: none; transition: all 0.3s ease;
-        }
-        .search-wrap input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
-        .action-btns { display: flex; gap: 0.5rem; flex-shrink: 0; }
-        .act-btn {
-            padding: 0.6rem 0.9rem; border-radius: 10px; font-size: 0.8rem;
-            font-family: 'Rajdhani', sans-serif; font-weight: 700; cursor: pointer;
-            transition: all 0.3s ease; border: 1px solid; display: flex; align-items: center; gap: 0.4rem;
-        }
-        .act-btn.csv { background: rgba(0,230,118,0.08); border-color: rgba(0,230,118,0.2); color: var(--accent); }
-        .act-btn.csv:hover { background: rgba(0,230,118,0.15); }
-        .act-btn.del-all { background: rgba(255,23,68,0.08); border-color: rgba(255,23,68,0.2); color: var(--fire-red); }
-        .act-btn.del-all:hover { background: rgba(255,23,68,0.15); }
+        /* Transiciones de vista */
+        .view { transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
+        .view-hidden { opacity: 0; transform: translateY(20px); pointer-events: none; position: absolute; }
+        .view-visible { opacity: 1; transform: translateY(0); pointer-events: all; position: relative; }
 
-        .table-wrap {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 14px; overflow: hidden; backdrop-filter: blur(10px);
-        }
-        .table-scroll { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; min-width: 650px; }
-        thead th {
-            padding: 0.85rem 1rem; text-align: left; font-size: 0.72rem;
-            font-weight: 700; color: var(--muted); text-transform: uppercase;
-            letter-spacing: 1px; border-bottom: 1px solid var(--border);
-            background: rgba(0,0,0,0.3); white-space: nowrap; position: sticky; top: 0;
-        }
-        thead th:first-child { width: 50px; text-align: center; }
-        thead th:last-child { width: 50px; }
-        tbody td {
-            padding: 0.75rem 1rem; font-size: 0.88rem;
-            border-bottom: 1px solid rgba(255,255,255,0.025); vertical-align: middle;
-        }
-        tbody tr { transition: background 0.2s ease; }
-        tbody tr:hover { background: rgba(0,230,118,0.03); }
-        tbody tr:last-child td { border-bottom: none; }
-        tbody td:first-child { text-align: center; color: var(--muted); font-size: 0.8rem; font-weight: 600; }
-        .doc-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 5px; font-size: 0.72rem; font-weight: 700; }
-        .doc-badge.ced { background: rgba(0,230,118,0.1); color: var(--accent); }
-        .doc-badge.fn { background: rgba(255,109,0,0.1); color: var(--fire-orange); }
-        .game-id-cell { font-family: 'Orbitron', sans-serif; font-size: 0.82rem; color: var(--accent); letter-spacing: 0.5px; }
-        .date-cell { color: var(--muted); font-size: 0.82rem; white-space: nowrap; }
-        .del-row {
-            background: transparent; border: 1px solid rgba(255,23,68,0.12);
-            color: rgba(255,23,68,0.5); width: 30px; height: 30px; border-radius: 6px;
-            cursor: pointer; font-size: 0.75rem; transition: all 0.2s ease;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .del-row:hover { background: rgba(255,23,68,0.15); border-color: rgba(255,23,68,0.3); color: var(--fire-red); }
-        .empty-state { text-align: center; padding: 3rem 1rem; color: var(--muted); }
-        .empty-state i { font-size: 2.5rem; margin-bottom: 0.8rem; opacity: 0.3; display: block; }
-        .empty-state p { font-size: 0.9rem; }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
-        .confirm-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
-            z-index: 400; display: none; align-items: center; justify-content: center; padding: 1rem;
+        /* Mejor puntuación */
+        .best-score-badge {
+            position: absolute; top: 12px; right: 12px;
+            background: var(--accent); color: #fff; font-size: 0.7rem;
+            font-weight: 700; padding: 3px 10px; border-radius: 100px;
         }
-        .confirm-overlay.vis { display: flex; }
-        .confirm-box {
-            background: var(--bg-card); border: 1px solid rgba(255,23,68,0.2);
-            border-radius: 16px; padding: 1.8rem; text-align: center;
-            max-width: 350px; width: 100%; animation: scI 0.3s ease-out;
-        }
-        .confirm-box h4 { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; color: var(--fire-red); }
-        .confirm-box p { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.2rem; }
-        .confirm-btns { display: flex; gap: 0.6rem; justify-content: center; }
-        .confirm-btns button {
-            padding: 0.55rem 1.2rem; border-radius: 8px; font-family: 'Rajdhani', sans-serif;
-            font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s ease; border: none;
-        }
-        .cbtn-cancel { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid rgba(255,255,255,0.1) !important; }
-        .cbtn-cancel:hover { color: var(--fg); }
-        .cbtn-confirm { background: var(--fire-red); color: #fff; }
-        .cbtn-confirm:hover { background: #d50000; }
 
-        .footer { margin-top: auto; padding-top: 3rem; text-align: center; color: rgba(255,255,255,0.1); font-size: 0.72rem; font-weight: 500; letter-spacing: 1px; }
-
-        @media (max-width: 500px) {
-            .form-card { padding: 1.5rem 1.2rem; }
-            .form-row { grid-template-columns: 1fr; gap: 1rem; }
-            .success-card { padding: 2rem 1.5rem; }
-            .stats-grid { grid-template-columns: 1fr 1fr; }
-            .search-bar { flex-direction: column; }
-            .action-btns { width: 100%; }
-            .act-btn { flex: 1; justify-content: center; }
-            .admin-header { padding: 0.8rem 1rem; }
-            .admin-header h2 { font-size: 0.85rem; }
+        /* Mensaje de feedback */
+        .feedback-msg {
+            border-radius: 16px; padding: 20px 24px;
+            font-size: 1rem; line-height: 1.6;
         }
+        .feedback-excellent { background: var(--success-dim); border: 1px solid var(--success); color: var(--success); }
+        .feedback-good { background: rgba(255,192,72,0.1); border: 1px solid var(--warning); color: var(--warning); }
+        .feedback-regular { background: rgba(255,107,53,0.1); border: 1px solid var(--accent); color: var(--accent); }
+        .feedback-poor { background: var(--error-dim); border: 1px solid var(--error); color: var(--error); }
+
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .tw-text { font-size: 1.3rem; }
+            .score-circle { width: 140px; height: 140px; }
+            .score-number .num { font-size: 2.8rem; }
+            .rec-btn { width: 80px; height: 80px; font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
-    <canvas id="particles-canvas"></canvas>
-    <div class="cyber-grid"></div>
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
 
-    <!-- Iframe invisible para enviar el formulario a FormSubmit sin salir de la pagina -->
-    <iframe name="fsFrame" style="display:none;width:0;height:0;border:0;" aria-hidden="true" tabindex="-1"></iframe>
+<div class="bg-blobs" aria-hidden="true"></div>
 
-    <!-- Formulario oculto que envia los datos por correo via FormSubmit -->
-    <form id="emailForm" action="https://formsubmit.co/mdaasanjuandelimay@gmail.com" method="POST" target="fsFrame" style="display:none;">
-        <input type="hidden" name="_subject" value="Nuevo registro - Torneo Free Fire">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="Nombre" id="eNombre">
-        <input type="hidden" name="Apellido" id="eApellido">
-        <input type="hidden" name="Tipo documento" id="eTipoDoc">
-        <input type="hidden" name="Documento" id="eDoc">
-        <input type="hidden" name="ID Free Fire" id="eGameId">
-        <input type="hidden" name="Fecha registro" id="eFecha">
-    </form>
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer"></div>
 
-    <div class="toast-c" id="toastC"></div>
+<!-- Contador regresivo -->
+<div class="countdown-overlay" id="countdownOverlay">
+    <div class="countdown-number" id="countdownNumber">3</div>
+</div>
 
-    <div class="admin-link" id="adminLink" title="Administracion" role="button" tabindex="0" aria-label="Panel de administracion">
-        <i class="fa-solid fa-lock"></i>
-    </div>
+<div class="relative z-10 min-h-screen flex flex-col">
 
-    <!-- ==================== VISTA REGISTRO ==================== -->
-    <main class="main-container" id="regView">
-        <div class="header-badge"><span class="dot"></span> Registro abierto</div>
-        <h1 class="main-title">TORNEO <span class="hl">RELAMPAGO</span><br>FREE FIRE</h1>
-        <p class="subtitle">Inscripcion oficial para jugadores del municipio</p>
-        <div class="organizers">
-            <span class="org-tag rjc"><i class="fa-solid fa-tower-broadcast" style="margin-right:4px;font-size:0.7rem;"></i> Red de Jovenes Comunicadores</span>
-            <span class="org-tag mdaa"><i class="fa-solid fa-shield-halved" style="margin-right:4px;font-size:0.7rem;"></i> MDAA</span>
+    <!-- Header -->
+    <header class="px-6 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b" style="border-color: var(--border);">
+        <div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" style="color: var(--accent);">
+                <i class="fas fa-language mr-2"></i>Trabalenguas
+            </h1>
+            <p class="text-sm mt-1" style="color: var(--fg-muted);">Practica tu expresión oral y mejora tu pronunciación</p>
         </div>
-        <div class="counter-bar">
-            <i class="fa-solid fa-gamepad" style="color:var(--accent);font-size:1.1rem;"></i>
-            <span class="count" id="playerCount">0</span>
-            <span class="label">jugadores registrados</span>
-        </div>
-
-        <div class="form-card" style="position:relative;">
-            <div class="form-loading" id="formLoading">
-                <div class="spinner"></div>
-                <span>Registrando...</span>
+        <div class="flex gap-4 text-sm font-semibold">
+            <div class="flex items-center gap-2 px-4 py-2 rounded-xl" style="background: var(--bg-card); border: 1px solid var(--border);">
+                <i class="fas fa-fire" style="color: var(--accent);"></i>
+                <span id="streakCount">0</span> racha
             </div>
-            <div class="form-title"><i class="fa-solid fa-user-plus"></i> Formulario de Registro</div>
-            <form id="regForm" novalidate>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label" for="nombre">Nombre</label>
-                        <input type="text" class="form-input" id="nombre" placeholder="Tu nombre" autocomplete="given-name" required>
-                        <div class="error-msg" id="nombreErr"><i class="fa-solid fa-circle-exclamation"></i> Ingresa tu nombre</div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="apellido">Apellido</label>
-                        <input type="text" class="form-input" id="apellido" placeholder="Tu apellido" autocomplete="family-name" required>
-                        <div class="error-msg" id="apellidoErr"><i class="fa-solid fa-circle-exclamation"></i> Ingresa tu apellido</div>
-                    </div>
-                </div>
-                <label class="form-label">Documento de identidad</label>
-                <div class="toggle-group" role="radiogroup" aria-label="Tipo de documento">
-                    <button type="button" class="toggle-option active" data-value="cedula" role="radio" aria-checked="true">
-                        <i class="fa-solid fa-id-card" style="margin-right:4px;"></i> Tengo cedula
-                    </button>
-                    <button type="button" class="toggle-option" data-value="fecha" role="radio" aria-checked="false">
-                        <i class="fa-solid fa-cake-candles" style="margin-right:4px;"></i> No tengo cedula
-                    </button>
-                </div>
-                <div class="cond-field vis" id="cedField">
-                    <label class="form-label" for="cedula">Numero de cedula</label>
-                    <input type="text" class="form-input" id="cedula" placeholder="182 451289 4000D" autocomplete="off">
-                    <div class="error-msg" id="cedErr"><i class="fa-solid fa-circle-exclamation"></i> Ingresa tu numero de cedula</div>
-                </div>
-                <div class="cond-field" id="fnField">
-                    <label class="form-label" for="fechaNac">Fecha de nacimiento</label>
-                    <input type="date" class="form-input" id="fechaNac">
-                    <div class="error-msg" id="fnErr"><i class="fa-solid fa-circle-exclamation"></i> Ingresa tu fecha de nacimiento</div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="gameId">ID de Free Fire</label>
-                    <input type="text" class="form-input" id="gameId" placeholder="Ej: 1234567890" inputmode="numeric" required>
-                    <div class="error-msg" id="gidErr"><i class="fa-solid fa-circle-exclamation"></i> Ingresa tu ID de Free Fire</div>
-                </div>
-                <button type="submit" class="submit-btn" id="subBtn">REGISTRARME AHORA</button>
-            </form>
+            <div class="flex items-center gap-2 px-4 py-2 rounded-xl" style="background: var(--bg-card); border: 1px solid var(--border);">
+                <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                <span id="completedCount">0</span> logrados
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 px-4 sm:px-6 py-6 max-w-5xl mx-auto w-full">
+
+        <!-- Vista: Selección -->
+        <div id="selectorView" class="view view-visible">
+            <!-- Pestañas -->
+            <div class="flex flex-wrap gap-3 mb-8" role="tablist">
+                <button class="tab-btn active" data-tab="facil" role="tab" aria-selected="true">
+                    <i class="fas fa-seedling mr-1"></i> Facil
+                </button>
+                <button class="tab-btn" data-tab="medio" role="tab" aria-selected="false">
+                    <i class="fas fa-tree mr-1"></i> Medio
+                </button>
+                <button class="tab-btn" data-tab="dificil" role="tab" aria-selected="false">
+                    <i class="fas fa-mountain mr-1"></i> Dificil
+                </button>
+            </div>
+
+            <!-- Grid de trabalenguas -->
+            <div id="twGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Se llena dinámicamente -->
+            </div>
         </div>
 
-        <div class="recent-list" id="recentList" style="display:none;">
-            <div class="recent-title">Registros recientes</div>
-            <div id="recentItems"></div>
+        <!-- Vista: Práctica -->
+        <div id="practiceView" class="view view-hidden">
+            <button id="backBtn" class="flex items-center gap-2 mb-6 text-sm font-semibold transition-colors hover:opacity-80" style="color: var(--fg-muted);" aria-label="Volver a la selección">
+                <i class="fas fa-arrow-left"></i> Volver
+            </button>
+
+            <!-- Badge y título -->
+            <div class="mb-2" id="practiceBadge"></div>
+
+            <!-- Texto del trabalenguas -->
+            <div class="tw-text mb-8 p-6 rounded-2xl" style="background: var(--bg-card); border: 1px solid var(--border);" id="practiceText"></div>
+
+            <!-- Botones de acción -->
+            <div class="flex flex-col items-center gap-6 mb-8">
+                <div class="flex gap-4">
+                    <button id="listenBtn" class="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all hover:scale-105" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--fg);" aria-label="Escuchar pronunciación">
+                        <i class="fas fa-volume-up"></i> Escuchar
+                    </button>
+                    <button id="hintBtn" class="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all hover:scale-105" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--fg);" aria-label="Ver pista">
+                        <i class="fas fa-lightbulb"></i> Pista
+                    </button>
+                </div>
+
+                <!-- Pista oculta -->
+                <div id="hintBox" class="hidden w-full max-w-lg text-center text-sm rounded-xl p-4" style="background: var(--warning-dim); color: var(--warning); border: 1px solid var(--warning);"></div>
+
+                <!-- Botón de grabar con anillos -->
+                <div class="relative flex items-center justify-center" style="width: 160px; height: 160px;">
+                    <div class="rec-rings" id="recRings">
+                        <div class="rec-ring"></div>
+                        <div class="rec-ring"></div>
+                        <div class="rec-ring"></div>
+                    </div>
+                    <button class="rec-btn" id="recBtn" aria-label="Grabar">
+                        <i class="fas fa-microphone" id="recIcon"></i>
+                    </button>
+                </div>
+                <p class="text-sm font-medium" style="color: var(--fg-muted);" id="recStatus">
+                    Presiona para grabar
+                </p>
+
+                <!-- Waveform -->
+                <canvas id="waveformCanvas" class="hidden w-full max-w-lg"></canvas>
+            </div>
+
+            <!-- Resultados -->
+            <div id="resultsPanel" class="hidden">
+                <div class="rounded-2xl p-6 sm:p-8" style="background: var(--bg-card); border: 1px solid var(--border);">
+                    <!-- Puntuación y mensaje -->
+                    <div class="flex flex-col sm:flex-row items-center gap-8 mb-8">
+                        <div class="score-circle" id="scoreCircle">
+                            <svg viewBox="0 0 180 180" width="180" height="180">
+                                <circle class="track" cx="90" cy="90" r="78"/>
+                                <circle class="progress" id="scoreProgress" cx="90" cy="90" r="78"
+                                    stroke-dasharray="490" stroke-dashoffset="490"/>
+                            </svg>
+                            <div class="score-number">
+                                <span class="num" id="scoreNum">0</span>
+                                <span class="label">de 10</span>
+                            </div>
+                        </div>
+                        <div class="flex-1 text-center sm:text-left">
+                            <div id="feedbackMsg" class="feedback-msg"></div>
+                        </div>
+                    </div>
+
+                    <!-- Comparación palabra por palabra -->
+                    <h3 class="text-lg font-bold mb-4" style="color: var(--fg);">
+                        <i class="fas fa-text-width mr-2" style="color: var(--accent);"></i>Detalle palabra por palabra
+                    </h3>
+                    <div id="wordComparison" class="mb-6 flex flex-wrap"></div>
+
+                    <!-- Lo que dijiste -->
+                    <div id="saidSection" class="mb-6">
+                        <h3 class="text-sm font-bold mb-2" style="color: var(--fg-muted);">
+                            <i class="fas fa-microphone mr-2"></i>Lo que reconocimos:
+                        </h3>
+                        <p id="saidText" class="text-sm italic" style="color: var(--fg-muted);"></p>
+                    </div>
+
+                    <!-- Consejos -->
+                    <div id="tipsSection" class="mb-6">
+                        <h3 class="text-sm font-bold mb-2" style="color: var(--fg-muted);">
+                            <i class="fas fa-lightbulb mr-2"></i>Consejos para mejorar:
+                        </h3>
+                        <ul id="tipsList" class="text-sm space-y-1" style="color: var(--fg-muted);"></ul>
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div class="flex flex-wrap gap-3 justify-center">
+                        <button id="retryBtn" class="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all hover:scale-105" style="background: var(--accent); color: #fff;">
+                            <i class="fas fa-redo"></i> Intentar de nuevo
+                        </button>
+                        <button id="nextTwBtn" class="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all hover:scale-105" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--fg);">
+                            <i class="fas fa-forward"></i> Siguiente
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <footer class="footer">TORNEO RELAMPAGO FREE FIRE</footer>
     </main>
 
-    <!-- ==================== MODAL EXITO ==================== -->
-    <div class="success-overlay" id="sucOverlay" role="dialog" aria-modal="true">
-        <div class="success-card">
-            <div class="s-icon"><i class="fa-solid fa-check"></i></div>
-            <div class="s-title">REGISTRO EXITOSO</div>
-            <p class="s-sub">Ya quedas inscrito al torneo. Ahora unete al grupo de WhatsApp para recibir las instrucciones.</p>
-            <a href="https://chat.whatsapp.com/EU7gD1g87gm8gpovBpewKa" target="_blank" rel="noopener noreferrer" class="wa-btn">
-                <i class="fa-brands fa-whatsapp"></i> Unirme al grupo
-            </a>
-            <button class="close-m" id="closeModal">Cerrar</button>
-        </div>
-    </div>
+    <!-- Footer -->
+    <footer class="px-6 py-4 text-center text-xs border-t" style="border-color: var(--border); color: var(--fg-muted);">
+        <i class="fas fa-info-circle mr-1"></i>
+        Funciona mejor con Google Chrome. Se requiere permiso del micrófono.
+    </footer>
+</div>
 
-    <!-- ==================== ADMIN PANEL ==================== -->
-    <div class="admin-overlay" id="adminPanel">
-        <div class="admin-header">
-            <h2><i class="fa-solid fa-shield-halved"></i> Panel de Administracion</h2>
-            <button class="back-btn" id="backBtn"><i class="fa-solid fa-arrow-left"></i> Volver</button>
-        </div>
-        <div class="admin-body">
-            <div class="login-box" id="loginBox">
-                <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
-                <h3>Acceso restringido</h3>
-                <p>Ingresa la contrasena del organizador</p>
-                <input type="password" id="adminPass" placeholder="****" autocomplete="off">
-                <button id="loginBtn">INGRESAR</button>
-                <div class="login-error" id="loginErr">Contrasena incorrecta</div>
-                <p style="margin-top:1.2rem;font-size:0.72rem;color:rgba(255,255,255,0.15);">Contrasena por defecto: admin123</p>
-            </div>
-            <div class="admin-dash" id="adminDash">
-                <div class="stats-grid" id="statsGrid"></div>
+<script>
+// ============================================================
+// DATOS: Trabalenguas en español
+// ============================================================
+const trabalenguas = [
+    {
+        id: 1, texto: "Tres tristes tigres tragaban trigo en un trigal",
+        dificultad: "facil", sonido: "R",
+        pista: "Enfócate en la letra R, especialmente en 'tr' al principio de palabra"
+    },
+    {
+        id: 2, texto: "Pablito clavó un clavito, qué clavito clavó Pablito",
+        dificultad: "facil", sonido: "L / V",
+        pista: "Presta atención a la diferencia entre 'clavó' y 'clavito', y la letra V"
+    },
+    {
+        id: 3, texto: "El cielo está enladrillado, quién lo desenladrillará",
+        dificultad: "facil", sonido: "L / R",
+        pista: "Las sílabas 'lla' y 'dra' son clave, pronúncialas con claridad"
+    },
+    {
+        id: 4, texto: "Como poco coco como, poco coco compro",
+        dificultad: "facil", sonido: "C / O",
+        pista: "Diferencia bien la C de 'como' y la C de 'coco', y la O repetida"
+    },
+    {
+        id: 5, texto: "Erre con erre guitarra, erre con erre barril, rápido ruedan las ruedas del ferrocarril",
+        dificultad: "medio", sonido: "RR / R",
+        pista: "La RR y la R simple son diferentes: RR es más fuerte y vibrante"
+    },
+    {
+        id: 6, texto: "La madre de María Montes miente por montes y miente por valles",
+        dificultad: "medio", sonido: "M / N",
+        pista: "Cuidado con la secuencia de M y N, no las confundas"
+    },
+    {
+        id: 7, texto: "Me han dicho que has dicho un dicho que he dicho yo",
+        dificultad: "medio", sonido: "CH / D",
+        pista: "El sonido CH de 'dicho' es diferente a la D de 'dicho', articula cada uno"
+    },
+    {
+        id: 8, texto: "Parra tenía una perra y Guerra tenía una parra, la perra de Parra subió a la parra de Guerra",
+        dificultad: "medio", sonido: "P / G / RR",
+        pista: "Distingue P de G al inicio y las RR de 'Parra' y 'perra'"
+    },
+    {
+        id: 9, texto: "Tres tristes tigres tragaban trigo en un trigal, en tres tristes trastos tragaban tres tristes tigres",
+        dificultad: "dificil", sonido: "TR / R",
+        pista: "Es la versión extendida del clásico, domina el grupo 'tr' antes de intentarlo"
+    },
+    {
+        id: 10, texto: "El perro de San Roque no tiene rabo porque Ramón Ramírez se lo ha cortado",
+        dificultad: "dificil", sonido: "R / RR",
+        pista: "Combina R simple y RR fuerte, practica cada palabra por separado primero"
+    },
+    {
+        id: 11, texto: "Cuesta la cuesta y en la cuesta cuesta subir, y encima de la cuesta una cuestecita está",
+        dificultad: "dificil", sonido: "C / S",
+        pista: "La repetición de 'cuesta' con diferentes significados requiere ritmo y claridad"
+    },
+    {
+        id: 12, texto: "Yo no como coco ni cocoa, el que come coco y cocoa, coco y cocoa come",
+        dificultad: "dificil", sonido: "C / O",
+        pista: "La alternancia entre 'coco' y 'cocoa' exige precisión en la terminación"
+    }
+];
 
-                <div class="fs-note">
-                    <i class="fa-solid fa-envelope"></i>
-                    <strong>Los registros llegan automaticamente a tu correo.</strong>
-                    Si es la primera vez que se usa, sigue estos pasos:
-                    <div class="step">
-                        <span class="step-num">1</span>
-                        <span>Haz un registro de prueba desde la pagina principal</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-num">2</span>
-                        <span>Revisa <strong>mdaasanjuandelimay@gmail.com</strong> (tambien revisa spam)</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-num">3</span>
-                        <span>Haz clic en el enlace de <strong>"Confirmar tu email"</strong> que te envia FormSubmit</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-num">4</span>
-                        <span>Listo. De ahi en adelante todos los registros llegan solos</span>
-                    </div>
-                </div>
+// ============================================================
+// ESTADO DE LA APLICACIÓN
+// ============================================================
+let state = {
+    currentTab: 'facil',
+    selectedTW: null,
+    isRecording: false,
+    recognition: null,
+    audioContext: null,
+    analyser: null,
+    mediaStream: null,
+    animFrameId: null,
+    bestScores: {},
+    streak: 0,
+    completed: new Set(),
+    lastRecognized: ''
+};
 
-                <div class="config-section">
-                    <h4><i class="fa-solid fa-key" style="color:var(--fire-orange);"></i> Cambiar contrasena</h4>
-                    <div class="config-row" style="margin-top:0.5rem;">
-                        <input type="password" id="newPass" placeholder="Nueva contrasena" autocomplete="new-password">
-                        <button id="savePassBtn">Cambiar</button>
-                    </div>
-                </div>
+// ============================================================
+// VERIFICACIÓN DE COMPATIBILIDAD
+// ============================================================
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-                <div class="search-bar">
-                    <div class="search-wrap">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="searchInput" placeholder="Buscar por nombre, ID o cedula...">
-                    </div>
-                    <div class="action-btns">
-                        <button class="act-btn csv" id="exportBtn"><i class="fa-solid fa-file-csv"></i> CSV</button>
-                        <button class="act-btn del-all" id="delAllBtn"><i class="fa-solid fa-trash"></i> Borrar todo</button>
-                    </div>
-                </div>
+if (!SpeechRecognition) {
+    document.addEventListener('DOMContentLoaded', () => {
+        showToast('Tu navegador no soporta reconocimiento de voz. Usa Google Chrome.', 'error', 8000);
+    });
+}
 
-                <div class="table-wrap">
-                    <div class="table-scroll">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nombre completo</th>
-                                    <th>Documento</th>
-                                    <th>ID Free Fire</th>
-                                    <th>Fecha registro</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody id="tableBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- CONFIRM -->
-    <div class="confirm-overlay" id="confirmOverlay">
-        <div class="confirm-box">
-            <h4 id="confirmTitle">Confirmar</h4>
-            <p id="confirmMsg">Seguro que deseas continuar?</p>
-            <div class="confirm-btns">
-                <button class="cbtn-cancel" id="confirmCancel">Cancelar</button>
-                <button class="cbtn-confirm" id="confirmOk">Confirmar</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-    // ============================================================
-    // PARTICULAS
-    // ============================================================
-    (function() {
-        const cv = document.getElementById('particles-canvas');
-        const ctx = cv.getContext('2d');
-        let ps = [];
-        function resize() { cv.width = innerWidth; cv.height = innerHeight; }
-        resize(); addEventListener('resize', resize);
-        for (let i = 0; i < 40; i++) {
-            ps.push({
-                x: Math.random() * cv.width, y: Math.random() * cv.height,
-                vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
-                sz: Math.random() * 2 + 0.5, op: Math.random() * 0.3 + 0.1,
-                col: Math.random() > 0.7 ? '255,109,0' : '0,230,118'
-            });
+// ============================================================
+// ALGORITMO DE LEVENSHTEIN
+// ============================================================
+function levenshtein(a, b) {
+    const m = a.length, n = b.length;
+    const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+    for (let i = 0; i <= m; i++) dp[i][0] = i;
+    for (let j = 0; j <= n; j++) dp[0][j] = j;
+    for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+            dp[i][j] = a[i-1] === b[j-1]
+                ? dp[i-1][j-1]
+                : 1 + Math.min(dp[i-1][j-1], dp[i][j-1], dp[i-1][j]);
         }
-        function draw() {
-            ctx.clearRect(0, 0, cv.width, cv.height);
-            ps.forEach(p => {
-                p.x += p.vx; p.y += p.vy;
-                if (p.x < 0 || p.x > cv.width) p.vx *= -1;
-                if (p.y < 0 || p.y > cv.height) p.vy *= -1;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, Math.max(0.5, p.sz), 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${p.col},${p.op})`;
-                ctx.fill();
-            });
-            for (let i = 0; i < ps.length; i++) {
-                for (let j = i + 1; j < ps.length; j++) {
-                    const dx = ps[i].x - ps[j].x, dy = ps[i].y - ps[j].y;
-                    const d = Math.sqrt(dx * dx + dy * dy);
-                    if (d < 100) {
-                        ctx.beginPath();
-                        ctx.moveTo(ps[i].x, ps[i].y);
-                        ctx.lineTo(ps[j].x, ps[j].y);
-                        ctx.strokeStyle = `rgba(0,230,118,${0.04 * (1 - d / 100)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
+    }
+    return dp[m][n];
+}
+
+// ============================================================
+// NORMALIZACIÓN DE TEXTO
+// ============================================================
+function normalizeText(text) {
+    return text.toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/[.,;:!?¿¡""''()\-–—]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+// ============================================================
+// ANÁLISIS Y PUNTUACIÓN
+// ============================================================
+function analyzeSpeech(expectedText, recognizedText) {
+    const expected = normalizeText(expectedText).split(' ');
+    const recognized = normalizeText(recognizedText).split(' ');
+
+    let wordResults = [];
+    let usedIndices = new Set();
+
+    for (let i = 0; i < expected.length; i++) {
+        const expWord = expected[i];
+        let bestMatch = null;
+        let bestScore = 0;
+        let bestIndex = -1;
+
+        // Buscar la mejor coincidencia en un rango amplio
+        for (let j = 0; j < recognized.length; j++) {
+            if (usedIndices.has(j)) continue;
+
+            const dist = levenshtein(expWord, recognized[j]);
+            const maxLen = Math.max(expWord.length, recognized[j].length, 1);
+            const similarity = 1 - (dist / maxLen);
+
+            // Bonus por posición cercana
+            const posBonus = 1 - Math.min(Math.abs(i - j) / Math.max(expected.length, 1), 1) * 0.15;
+            const adjScore = similarity * posBonus;
+
+            if (adjScore > bestScore) {
+                bestScore = adjScore;
+                bestMatch = recognized[j];
+                bestIndex = j;
             }
-            requestAnimationFrame(draw);
         }
-        draw();
-    })();
 
-    // ============================================================
-    // ESTADO
-    // ============================================================
-    let regs = JSON.parse(localStorage.getItem('ff_regs') || '[]');
-    let adminPwd = localStorage.getItem('ff_pwd') || 'admin123';
-    let docType = 'cedula';
-
-    // ============================================================
-    // ELEMENTOS
-    // ============================================================
-    const regForm = document.getElementById('regForm');
-    const togOpts = document.querySelectorAll('.toggle-option');
-    const cedField = document.getElementById('cedField');
-    const fnField = document.getElementById('fnField');
-    const cedInput = document.getElementById('cedula');
-    const fnInput = document.getElementById('fechaNac');
-    const sucOverlay = document.getElementById('sucOverlay');
-    const adminPanel = document.getElementById('adminPanel');
-    const loginBox = document.getElementById('loginBox');
-    const adminDash = document.getElementById('adminDash');
-    const formLoading = document.getElementById('formLoading');
-    const subBtn = document.getElementById('subBtn');
-    const emailForm = document.getElementById('emailForm');
-
-    // ============================================================
-    // TOGGLE CEDULA / FECHA
-    // ============================================================
-    togOpts.forEach(b => b.addEventListener('click', () => {
-        togOpts.forEach(o => { o.classList.remove('active'); o.setAttribute('aria-checked', 'false'); });
-        b.classList.add('active'); b.setAttribute('aria-checked', 'true');
-        docType = b.dataset.value;
-        cedField.classList.toggle('vis', docType === 'cedula');
-        fnField.classList.toggle('vis', docType === 'fecha');
-        clearErrs();
-    }));
-
-    // Solo numeros en ID de Free Fire
-    document.getElementById('gameId').addEventListener('input', function() {
-        this.value = this.value.replace(/[^0-9]/g, '');
-    });
-
-    // ============================================================
-    // VALIDACION
-    // ============================================================
-    function clearErrs() {
-        document.querySelectorAll('.form-input').forEach(i => i.classList.remove('error'));
-        document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
-    }
-    function showErr(id, errId) {
-        document.getElementById(id).classList.add('error');
-        document.getElementById(errId).classList.add('show');
-    }
-    document.querySelectorAll('.form-input').forEach(inp => {
-        inp.addEventListener('input', function() {
-            this.classList.remove('error');
-            const e = this.parentElement.querySelector('.error-msg');
-            if (e) e.classList.remove('show');
-        });
-    });
-
-    function validate() {
-        clearErrs(); let ok = true;
-        if (!document.getElementById('nombre').value.trim()) { showErr('nombre', 'nombreErr'); ok = false; }
-        if (!document.getElementById('apellido').value.trim()) { showErr('apellido', 'apellidoErr'); ok = false; }
-        if (docType === 'cedula') {
-            if (!cedInput.value.trim() || cedInput.value.trim().length < 3) { showErr('cedula', 'cedErr'); ok = false; }
+        if (bestScore >= 0.55 && bestIndex !== -1) {
+            usedIndices.add(bestIndex);
+            const isExact = bestScore >= 0.85;
+            wordResults.push({
+                expected: expWord,
+                said: bestMatch,
+                similarity: bestScore,
+                status: isExact ? 'correct' : 'close'
+            });
         } else {
-            if (!fnInput.value) { showErr('fechaNac', 'fnErr'); ok = false; }
-        }
-        if (!document.getElementById('gameId').value.trim() || document.getElementById('gameId').value.trim().length < 4) {
-            showErr('gameId', 'gidErr'); ok = false;
-        }
-        if (!ok) toast('Completa todos los campos correctamente', 'err');
-        return ok;
-    }
-
-    // ============================================================
-    // ENVIAR POR CORREO VIA FORMSUBMIT (formulario oculto + iframe)
-    // ============================================================
-    function sendToEmail(reg) {
-        const docLabel = reg.docType === 'cedula' ? 'Cedula' : 'Fecha de nacimiento';
-        const fecha = new Date(reg.timestamp).toLocaleString('es-CO', {
-            day: '2-digit', month: '2-digit', year: 'numeric',
-            hour: '2-digit', minute: '2-digit'
-        });
-
-        // Llenar los campos ocultos del formulario
-        document.getElementById('eNombre').value = reg.nombre;
-        document.getElementById('eApellido').value = reg.apellido;
-        document.getElementById('eTipoDoc').value = docLabel;
-        document.getElementById('eDoc').value = reg.docValue;
-        document.getElementById('eGameId').value = reg.gameId;
-        document.getElementById('eFecha').value = fecha;
-
-        // Enviar el formulario dentro del iframe invisible
-        emailForm.submit();
-    }
-
-    // ============================================================
-    // REGISTRO PRINCIPAL
-    // ============================================================
-    regForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        if (!validate()) return;
-
-        // Mostrar loading
-        formLoading.classList.add('vis');
-        subBtn.disabled = true;
-
-        const reg = {
-            id: Date.now(),
-            nombre: document.getElementById('nombre').value.trim(),
-            apellido: document.getElementById('apellido').value.trim(),
-            docType,
-            docValue: docType === 'cedula' ? cedInput.value.trim() : fnInput.value,
-            gameId: document.getElementById('gameId').value.trim(),
-            timestamp: Date.now()
-        };
-
-        // Guardar localmente
-        regs.push(reg);
-        localStorage.setItem('ff_regs', JSON.stringify(regs));
-        updateCount();
-        renderRecent();
-
-        // Enviar por correo (se envia al iframe, no bloquea)
-        sendToEmail(reg);
-
-        // Esperar un momento para que el formulario se envie, luego mostrar exito
-        setTimeout(() => {
-            formLoading.classList.remove('vis');
-            subBtn.disabled = false;
-            showSuccessModal();
-            regForm.reset();
-            togOpts[0].click();
-        }, 1500);
-    });
-
-    // ============================================================
-    // MODAL EXITO
-    // ============================================================
-    function showSuccessModal() {
-        sucOverlay.classList.add('vis');
-        document.body.style.overflow = 'hidden';
-        toast('Registro completado con exito', 'ok');
-    }
-    document.getElementById('closeModal').addEventListener('click', closeSuc);
-    sucOverlay.addEventListener('click', e => { if (e.target === sucOverlay) closeSuc(); });
-    function closeSuc() { sucOverlay.classList.remove('vis'); document.body.style.overflow = ''; }
-
-    // ============================================================
-    // CONTADOR Y RECIENTES
-    // ============================================================
-    function updateCount() {
-        const el = document.getElementById('playerCount');
-        const target = regs.length;
-        const cur = parseInt(el.textContent) || 0;
-        if (cur === target) return;
-        const start = performance.now();
-        function tick(now) {
-            const p = Math.min((now - start) / 500, 1);
-            el.textContent = Math.round(cur + (target - cur) * (1 - Math.pow(1 - p, 3)));
-            if (p < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-    }
-
-    function renderRecent() {
-        const list = document.getElementById('recentList');
-        const items = document.getElementById('recentItems');
-        if (!regs.length) { list.style.display = 'none'; return; }
-        list.style.display = 'block';
-        items.innerHTML = '';
-        regs.slice(-5).reverse().forEach((r, i) => {
-            const d = document.createElement('div');
-            d.className = 'recent-item';
-            d.style.animationDelay = `${i * 0.08}s`;
-            d.innerHTML = `<div class="av">${esc((r.nombre[0] + r.apellido[0]).toUpperCase())}</div><div class="info"><div class="nm">${esc(r.nombre)} ${esc(r.apellido)}</div><div class="gid">ID: ${esc(r.gameId)}</div></div><div class="tm">${timeAgo(r.timestamp)}</div>`;
-            items.appendChild(d);
-        });
-    }
-
-    function timeAgo(ts) {
-        const s = Math.floor((Date.now() - ts) / 1000);
-        if (s < 60) return 'ahora';
-        const m = Math.floor(s / 60);
-        if (m < 60) return `hace ${m}m`;
-        const h = Math.floor(m / 60);
-        if (h < 24) return `hace ${h}h`;
-        return `hace ${Math.floor(h / 24)}d`;
-    }
-    function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-
-    // ============================================================
-    // TOAST
-    // ============================================================
-    function toast(msg, type) {
-        const t = document.createElement('div');
-        t.className = `toast ${type}`;
-        t.innerHTML = `<i class="fa-solid ${type === 'err' ? 'fa-circle-xmark' : 'fa-circle-check'}"></i> ${msg}`;
-        document.getElementById('toastC').appendChild(t);
-        setTimeout(() => { t.style.animation = 'tO 0.3s ease-in forwards'; setTimeout(() => t.remove(), 300); }, 3000);
-    }
-
-    // ============================================================
-    // ADMIN PANEL
-    // ============================================================
-    document.getElementById('adminLink').addEventListener('click', openAdmin);
-    document.getElementById('adminLink').addEventListener('keydown', e => { if (e.key === 'Enter') openAdmin(); });
-
-    function openAdmin() {
-        adminPanel.classList.add('vis');
-        document.body.style.overflow = 'hidden';
-        if (sessionStorage.getItem('ff_logged') === '1') {
-            loginBox.style.display = 'none';
-            adminDash.classList.add('vis');
-            refreshAdmin();
-        } else {
-            loginBox.style.display = 'block';
-            adminDash.classList.remove('vis');
-            document.getElementById('adminPass').value = '';
-            document.getElementById('loginErr').style.display = 'none';
-        }
-    }
-    function closeAdmin() {
-        if (!adminPanel.classList.contains('vis')) return;
-        adminPanel.classList.remove('vis');
-        document.body.style.overflow = '';
-    }
-    document.getElementById('backBtn').addEventListener('click', closeAdmin);
-
-    // Login
-    document.getElementById('loginBtn').addEventListener('click', doLogin);
-    document.getElementById('adminPass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
-    function doLogin() {
-        if (document.getElementById('adminPass').value === adminPwd) {
-            sessionStorage.setItem('ff_logged', '1');
-            loginBox.style.display = 'none';
-            adminDash.classList.add('vis');
-            refreshAdmin();
-        } else {
-            document.getElementById('loginErr').style.display = 'block';
-            document.getElementById('adminPass').value = '';
+            wordResults.push({
+                expected: expWord,
+                said: bestMatch || null,
+                similarity: 0,
+                status: 'wrong'
+            });
         }
     }
 
-    function refreshAdmin() { renderStats(); renderTable(); }
+    // Calcular puntuación
+    const totalSim = wordResults.reduce((s, r) => s + r.similarity, 0);
+    const avgSim = totalSim / Math.max(wordResults.length, 1);
+    const rawScore = avgSim * 10;
+    const score = Math.max(1, Math.min(10, Math.round(rawScore)));
 
-    function renderStats() {
-        const t = regs.length, c = regs.filter(r => r.docType === 'cedula').length;
-        document.getElementById('statsGrid').innerHTML = `
-            <div class="stat-card green"><div class="stat-num">${t}</div><div class="stat-lbl">Total registrados</div></div>
-            <div class="stat-card green"><div class="stat-num">${c}</div><div class="stat-lbl">Con cedula</div></div>
-            <div class="stat-card orange"><div class="stat-num">${t - c}</div><div class="stat-lbl">Sin cedula</div></div>
-            <div class="stat-card white"><div class="stat-num">${new Set(regs.map(r => r.gameId)).size}</div><div class="stat-lbl">IDs unicos</div></div>
-        `;
+    const correctCount = wordResults.filter(r => r.status === 'correct').length;
+    const closeCount = wordResults.filter(r => r.status === 'close').length;
+    const wrongCount = wordResults.filter(r => r.status === 'wrong').length;
+
+    return { score, wordResults, correctCount, closeCount, wrongCount, totalWords: expected.length, avgSim };
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg, type = 'success', duration = 4000) {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', warning: 'fa-exclamation-triangle' };
+    toast.innerHTML = `<i class="fas ${icons[type] || icons.success}"></i> ${msg}`;
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.style.transition = 'opacity 0.3s';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+}
+
+// ============================================================
+// CONFETI
+// ============================================================
+function launchConfetti() {
+    const colors = ['#ff6b35','#2dd4a8','#ffc048','#ff4757','#6c5ce7','#00cec9'];
+    for (let i = 0; i < 60; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.top = '-20px';
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        piece.style.width = (6 + Math.random() * 8) + 'px';
+        piece.style.height = (6 + Math.random() * 8) + 'px';
+        document.body.appendChild(piece);
+
+        const duration = 1500 + Math.random() * 2000;
+        const xDrift = (Math.random() - 0.5) * 200;
+        const rotation = Math.random() * 720;
+        piece.animate([
+            { transform: 'translateY(0) translateX(0) rotate(0deg)', opacity: 1 },
+            { transform: `translateY(100vh) translateX(${xDrift}px) rotate(${rotation}deg)`, opacity: 0 }
+        ], { duration, easing: 'cubic-bezier(0.25,0.46,0.45,0.94)' }).onfinish = () => piece.remove();
     }
+}
 
-    function renderTable(filter = '') {
-        const tbody = document.getElementById('tableBody');
-        let data = regs;
-        if (filter) {
-            const f = filter.toLowerCase();
-            data = regs.filter(r =>
-                r.nombre.toLowerCase().includes(f) || r.apellido.toLowerCase().includes(f) ||
-                r.gameId.includes(f) || r.docValue.toLowerCase().includes(f)
-            );
-        }
-        if (!data.length) {
-            tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><i class="fa-solid fa-inbox"></i><p>${filter ? 'Sin resultados' : 'No hay registros todavia'}</p></div></td></tr>`;
-            return;
-        }
-        tbody.innerHTML = data.map((r, i) => {
-            const badge = r.docType === 'cedula'
-                ? `<span class="doc-badge ced">Cedula: ${esc(r.docValue)}</span>`
-                : `<span class="doc-badge fn">Nac: ${esc(r.docValue)}</span>`;
-            const fecha = new Date(r.timestamp).toLocaleString('es-CO', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-            return `<tr>
-                <td>${i + 1}</td>
-                <td style="font-weight:700;">${esc(r.nombre)} ${esc(r.apellido)}</td>
-                <td>${badge}</td>
-                <td class="game-id-cell">${esc(r.gameId)}</td>
-                <td class="date-cell">${fecha}</td>
-                <td><button class="del-row" onclick="deleteReg(${r.id})" title="Eliminar"><i class="fa-solid fa-xmark"></i></button></td>
-            </tr>`;
-        }).join('');
+// ============================================================
+// SÍNTESIS DE VOZ (Escuchar trabalenguas)
+// ============================================================
+function speakText(text) {
+    if (!('speechSynthesis' in window)) {
+        showToast('Tu navegador no soporta síntesis de voz', 'error');
+        return;
     }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'es-ES';
+    utterance.rate = 0.75;
+    utterance.pitch = 1;
 
-    document.getElementById('searchInput').addEventListener('input', function() { renderTable(this.value.trim()); });
+    // Intentar encontrar una voz en español
+    const voices = speechSynthesis.getVoices();
+    const esVoice = voices.find(v => v.lang.startsWith('es'));
+    if (esVoice) utterance.voice = esVoice;
 
-    window.deleteReg = function(id) {
-        showConfirm('Eliminar registro', 'Seguro que deseas eliminar este jugador?', () => {
-            regs = regs.filter(r => r.id !== id);
-            localStorage.setItem('ff_regs', JSON.stringify(regs));
-            refreshAdmin(); updateCount(); renderRecent();
-            toast('Registro eliminado', 'ok');
-        });
+    speechSynthesis.speak(utterance);
+}
+
+// ============================================================
+// VISUALIZACIÓN DE AUDIO (Waveform)
+// ============================================================
+function startWaveform(stream) {
+    const canvas = document.getElementById('waveformCanvas');
+    canvas.classList.remove('hidden');
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.offsetWidth * 2;
+    canvas.height = canvas.offsetHeight * 2;
+    ctx.scale(2, 2);
+
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    state.audioContext = audioCtx;
+    const source = audioCtx.createMediaStreamSource(stream);
+    const analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 256;
+    source.connect(analyser);
+    state.analyser = analyser;
+
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+    const w = canvas.offsetWidth;
+    const h = canvas.offsetHeight;
+
+    function draw() {
+        if (!state.isRecording) return;
+        state.animFrameId = requestAnimationFrame(draw);
+        analyser.getByteFrequencyData(dataArray);
+
+        ctx.clearRect(0, 0, w, h);
+
+        // Dibujar barras de frecuencia
+        const barCount = 64;
+        const barWidth = w / barCount;
+        const step = Math.floor(bufferLength / barCount);
+
+        for (let i = 0; i < barCount; i++) {
+            const val = dataArray[i * step] / 255;
+            const barH = Math.max(2, val * h * 0.85);
+            const x = i * barWidth;
+            const y = (h - barH) / 2;
+
+            const gradient = ctx.createLinearGradient(x, y, x, y + barH);
+            gradient.addColorStop(0, '#ff6b35');
+            gradient.addColorStop(1, '#2dd4a8');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.roundRect(x + 1, y, Math.max(1, barWidth - 2), barH, 2);
+            ctx.fill();
+        }
+    }
+    draw();
+}
+
+function stopWaveform() {
+    if (state.animFrameId) cancelAnimationFrame(state.animFrameId);
+    if (state.audioContext) { state.audioContext.close(); state.audioContext = null; }
+    state.analyser = null;
+    const canvas = document.getElementById('waveformCanvas');
+    canvas.classList.add('hidden');
+}
+
+// ============================================================
+// RECONOCIMIENTO DE VOZ
+// ============================================================
+function initRecognition() {
+    if (!SpeechRecognition) return;
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'es-ES';
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+
+    recognition.onresult = (event) => {
+        let transcript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+            transcript += event.results[i][0].transcript;
+        }
+        state.lastRecognized = transcript;
+        document.getElementById('recStatus').textContent = transcript || 'Escuchando...';
     };
 
-    document.getElementById('delAllBtn').addEventListener('click', () => {
-        if (!regs.length) { toast('No hay registros', 'err'); return; }
-        showConfirm('Borrar todo', `Se eliminaran ${regs.length} registros. Esta accion no se puede deshacer.`, () => {
-            regs = [];
-            localStorage.setItem('ff_regs', JSON.stringify(regs));
-            refreshAdmin(); updateCount();
-            document.getElementById('recentList').style.display = 'none';
-            document.getElementById('recentItems').innerHTML = '';
-            toast('Todos los registros eliminados', 'ok');
+    recognition.onend = () => {
+        if (state.isRecording) {
+            finishRecording();
+        }
+    };
+
+    recognition.onerror = (event) => {
+        console.error('Error de reconocimiento:', event.error);
+        if (state.isRecording) {
+            finishRecording();
+            if (event.error === 'no-speech') {
+                showToast('No se detectó voz. Intenta de nuevo hablando más fuerte.', 'warning');
+            } else if (event.error === 'not-allowed') {
+                showToast('Permiso de micrófono denegado. Actívalo en la configuración del navegador.', 'error', 6000);
+            }
+        }
+    };
+
+    state.recognition = recognition;
+}
+
+// ============================================================
+// GRABACIÓN
+// ============================================================
+async function startCountdown() {
+    if (state.isRecording) return;
+    if (!state.recognition) {
+        showToast('Reconocimiento de voz no disponible. Usa Google Chrome.', 'error');
+        return;
+    }
+
+    const overlay = document.getElementById('countdownOverlay');
+    const numEl = document.getElementById('countdownNumber');
+    overlay.classList.add('active');
+
+    for (let i = 3; i >= 1; i--) {
+        numEl.textContent = i;
+        numEl.style.animation = 'none';
+        numEl.offsetHeight; // forzar reflow
+        numEl.style.animation = 'countPop 0.8s cubic-bezier(0.4,0,0.2,1)';
+        await new Promise(r => setTimeout(r, 900));
+    }
+
+    overlay.classList.remove('active');
+    startRecording();
+}
+
+function startRecording() {
+    state.isRecording = true;
+    state.lastRecognized = '';
+
+    const recBtn = document.getElementById('recBtn');
+    const recIcon = document.getElementById('recIcon');
+    const recStatus = document.getElementById('recStatus');
+    const recRings = document.getElementById('recRings');
+
+    recBtn.classList.add('recording');
+    recIcon.className = 'fas fa-stop';
+    recStatus.textContent = 'Escuchando...';
+    recRings.classList.add('recording');
+
+    // Ocultar resultados anteriores
+    document.getElementById('resultsPanel').classList.add('hidden');
+
+    // Iniciar reconocimiento
+    try {
+        state.recognition.start();
+    } catch(e) {
+        console.error('Error al iniciar reconocimiento:', e);
+    }
+
+    // Iniciar visualización de audio
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+        state.mediaStream = stream;
+        startWaveform(stream);
+    }).catch(err => {
+        console.warn('No se pudo acceder al micrófono para visualización:', err);
+    });
+
+    // Auto-stop después de 15 segundos
+    state.recTimeout = setTimeout(() => {
+        if (state.isRecording) {
+            showToast('Tiempo límite alcanzado', 'warning');
+            finishRecording();
+        }
+    }, 15000);
+}
+
+function finishRecording() {
+    state.isRecording = false;
+    clearTimeout(state.recTimeout);
+
+    const recBtn = document.getElementById('recBtn');
+    const recIcon = document.getElementById('recIcon');
+    const recStatus = document.getElementById('recStatus');
+    const recRings = document.getElementById('recRings');
+
+    recBtn.classList.remove('recording');
+    recIcon.className = 'fas fa-microphone';
+    recRings.classList.remove('recording');
+
+    // Detener reconocimiento
+    try { state.recognition.stop(); } catch(e) {}
+
+    // Detener audio
+    stopWaveform();
+    if (state.mediaStream) {
+        state.mediaStream.getTracks().forEach(t => t.stop());
+        state.mediaStream = null;
+    }
+
+    recStatus.textContent = 'Procesando...';
+
+    // Dar un momento para que llegue el último resultado
+    setTimeout(() => {
+        processResult();
+    }, 500);
+}
+
+function processResult() {
+    const recognized = state.lastRecognized.trim();
+
+    if (!recognized) {
+        showToast('No se detectó voz. Intenta hablar más claro y cerca del micrófono.', 'warning');
+        document.getElementById('recStatus').textContent = 'Presiona para grabar';
+        return;
+    }
+
+    const tw = state.selectedTW;
+    const analysis = analyzeSpeech(tw.texto, recognized);
+
+    displayResults(analysis, recognized);
+    document.getElementById('recStatus').textContent = 'Presiona para grabar';
+}
+
+// ============================================================
+// MOSTRAR RESULTADOS
+// ============================================================
+function displayResults(analysis, recognized) {
+    const panel = document.getElementById('resultsPanel');
+    panel.classList.remove('hidden');
+
+    // Puntuación animada
+    const scoreNum = document.getElementById('scoreNum');
+    const scoreProgress = document.getElementById('scoreProgress');
+    const circumference = 2 * Math.PI * 78; // ~490
+
+    // Color según puntuación
+    let strokeColor;
+    if (analysis.score >= 9) strokeColor = '#2dd4a8';
+    else if (analysis.score >= 7) strokeColor = '#ffc048';
+    else if (analysis.score >= 5) strokeColor = '#ff6b35';
+    else strokeColor = '#ff4757';
+
+    scoreProgress.style.stroke = strokeColor;
+    scoreNum.style.color = strokeColor;
+
+    // Animar número
+    let currentScore = 0;
+    const targetScore = analysis.score;
+    const scoreInterval = setInterval(() => {
+        currentScore++;
+        scoreNum.textContent = currentScore;
+        if (currentScore >= targetScore) clearInterval(scoreInterval);
+    }, 120);
+
+    // Animar progreso circular
+    const targetOffset = circumference - (circumference * analysis.score / 10);
+    setTimeout(() => {
+        scoreProgress.style.strokeDashoffset = targetOffset;
+    }, 100);
+
+    // Mensaje de feedback
+    const feedbackMsg = document.getElementById('feedbackMsg');
+    let feedbackClass, feedbackIcon, feedbackTitle, feedbackText;
+
+    if (analysis.score >= 9) {
+        feedbackClass = 'feedback-excellent';
+        feedbackIcon = 'fa-trophy';
+        feedbackTitle = '¡Excelente!';
+        feedbackText = 'Tu pronunciación es impecable. Sigue así, dominas este trabalenguas.';
+    } else if (analysis.score >= 7) {
+        feedbackClass = 'feedback-good';
+        feedbackIcon = 'fa-thumbs-up';
+        feedbackTitle = '¡Muy bien!';
+        feedbackText = 'Casi lo logras. Repasa las palabras marcadas en amarillo y vuelve a intentarlo.';
+    } else if (analysis.score >= 5) {
+        feedbackClass = 'feedback-regular';
+        feedbackIcon = 'fa-bullseye';
+        feedbackTitle = 'Puedes mejorar';
+        feedbackText = 'Hay varias palabras que necesitan práctica. Escucha el trabalenguas e intenta pronunciar cada palabra lentamente.';
+    } else {
+        feedbackClass = 'feedback-poor';
+        feedbackIcon = 'fa-graduation-cap';
+        feedbackTitle = 'Necesitas más práctica';
+        feedbackText = 'No te desanimes. Escucha el trabalenguas primero y practica diciendo cada palabra por separado antes de intentar el trabalenguas completo.';
+    }
+
+    feedbackMsg.className = `feedback-msg ${feedbackClass}`;
+    feedbackMsg.innerHTML = `
+        <div class="flex items-center gap-2 mb-1">
+            <i class="fas ${feedbackIcon}"></i>
+            <strong class="text-lg">${feedbackTitle}</strong>
+        </div>
+        <p>${feedbackText}</p>
+    `;
+
+    // Comparación palabra por palabra
+    const wordComp = document.getElementById('wordComparison');
+    wordComp.innerHTML = '';
+    analysis.wordResults.forEach(r => {
+        const chip = document.createElement('span');
+        chip.className = `word-chip word-${r.status}`;
+        let saidInfo = '';
+        if (r.status === 'close' && r.said) {
+            saidInfo = `<span class="word-said">Dijiste: ${r.said}</span>`;
+        } else if (r.status === 'wrong') {
+            if (r.said) {
+                saidInfo = `<span class="word-said">Dijiste: ${r.said}</span>`;
+            } else {
+                saidInfo = `<span class="word-said">Omitida</span>`;
+            }
+        }
+        chip.innerHTML = `${r.expected}${saidInfo}`;
+        wordComp.appendChild(chip);
+    });
+
+    // Texto reconocido
+    document.getElementById('saidText').textContent = `"${recognized}"`;
+
+    // Consejos
+    const tipsList = document.getElementById('tipsList');
+    tipsList.innerHTML = '';
+    const tips = generateTips(analysis);
+    tips.forEach(tip => {
+        const li = document.createElement('li');
+        li.innerHTML = `<i class="fas fa-chevron-right mr-2" style="color: var(--accent); font-size: 0.7rem;"></i>${tip}`;
+        tipsList.appendChild(li);
+    });
+
+    // Actualizar estadísticas
+    updateStats(analysis);
+
+    // Confeti para puntuaciones altas
+    if (analysis.score >= 9) {
+        setTimeout(launchConfetti, 400);
+    }
+
+    // Scroll a resultados
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function generateTips(analysis) {
+    const tips = [];
+    const wrongWords = analysis.wordResults.filter(r => r.status === 'wrong');
+    const closeWords = analysis.wordResults.filter(r => r.status === 'close');
+
+    if (wrongWords.length > 0) {
+        const wrongList = wrongWords.map(w => `<strong>${w.expected}</strong>`).join(', ');
+        tips.push(`Presta especial atención a las palabras: ${wrongList}. Practícalas primero de forma aislada.`);
+    }
+
+    if (closeWords.length > 0) {
+        const closeList = closeWords.map(w => `<strong>${w.expected}</strong>`).join(', ');
+        tips.push(`Estuviste cerca con: ${closeList}. Repite lentamente esas sílabas.`);
+    }
+
+    // Consejo de sonido según el trabalenguas
+    const tw = state.selectedTW;
+    if (tw) {
+        if (tw.sonido.includes('R') || tw.sonido.includes('RR')) {
+            tips.push('Para la letra R: la R simple es un toque breve, la RR es más fuerte y vibrante. Practica vibrando la lengua.');
+        }
+        if (tw.sonido.includes('P') || tw.sonido.includes('G')) {
+            tips.push('Diferencia P (explosiva labial) de G (explosiva velar). Pon la mano frente a la boca: con P sentirás aire.');
+        }
+        if (tw.sonido.includes('C') || tw.sonido.includes('S')) {
+            tips.push('Cuidado con la C y la S: la C ante E/I se pronuncia como TH en algunas regiones, y la S es siempre silbante.');
+        }
+        if (tw.sonido.includes('L') || tw.sonido.includes('V')) {
+            tips.push('La L es lateral (la lengua toca el paladar) y la V es labiodental (diente inferior toca labio superior).');
+        }
+        if (tw.sonido.includes('M') || tw.sonido.includes('N')) {
+            tips.push('La M es bilabial (labios juntos) y la N es alveolar (lengua detrás de los dientes superiores).');
+        }
+    }
+
+    if (analysis.score < 7) {
+        tips.push('Consejo: escucha el trabalenguas primero con el botón "Escuchar" y repítelo palabra por palabra antes de intentarlo completo.');
+    }
+
+    tips.push('Habla a un ritmo moderado, ni muy rápido ni muy lento. La velocidad adecuada mejora la claridad.');
+
+    return tips;
+}
+
+function updateStats(analysis) {
+    const tw = state.selectedTW;
+    const prevBest = state.bestScores[tw.id] || 0;
+
+    if (analysis.score > prevBest) {
+        state.bestScores[tw.id] = analysis.score;
+    }
+
+    if (analysis.score >= 7) {
+        state.completed.add(tw.id);
+        state.streak++;
+    } else {
+        state.streak = 0;
+    }
+
+    document.getElementById('streakCount').textContent = state.streak;
+    document.getElementById('completedCount').textContent = state.completed.size;
+
+    // Actualizar badge en la tarjeta
+    renderGrid();
+}
+
+// ============================================================
+// RENDERIZADO DEL GRID
+// ============================================================
+function renderGrid() {
+    const grid = document.getElementById('twGrid');
+    const filtered = trabalenguas.filter(tw => tw.dificultad === state.currentTab);
+
+    grid.innerHTML = '';
+    filtered.forEach(tw => {
+        const card = document.createElement('div');
+        card.className = `tw-card ${state.selectedTW && state.selectedTW.id === tw.id ? 'selected' : ''}`;
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', `Trabalenguas: ${tw.texto}`);
+
+        const badgeClass = `badge-${tw.dificultad}`;
+        const bestBadge = state.bestScores[tw.id]
+            ? `<span class="best-score-badge"><i class="fas fa-star mr-1"></i>${state.bestScores[tw.id]}/10</span>`
+            : '';
+
+        card.innerHTML = `
+            ${bestBadge}
+            <div class="relative z-10">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="badge ${badgeClass}">${tw.dificultad}</span>
+                    <span class="text-xs font-semibold" style="color: var(--fg-muted);">Sonido: ${tw.sonido}</span>
+                </div>
+                <p class="font-bold text-base leading-relaxed" style="font-family: 'Space Grotesk', sans-serif; color: var(--fg);">
+                    ${tw.texto}
+                </p>
+            </div>
+        `;
+
+        card.addEventListener('click', () => selectTW(tw));
+        card.addEventListener('keydown', (e) => { if (e.key === 'Enter') selectTW(tw); });
+        grid.appendChild(card);
+    });
+}
+
+// ============================================================
+// SELECCIÓN DE TRABALENGUAS
+// ============================================================
+function selectTW(tw) {
+    state.selectedTW = tw;
+
+    // Cambiar vista
+    const selectorView = document.getElementById('selectorView');
+    const practiceView = document.getElementById('practiceView');
+
+    selectorView.classList.remove('view-visible');
+    selectorView.classList.add('view-hidden');
+
+    setTimeout(() => {
+        selectorView.style.display = 'none';
+        practiceView.style.display = 'block';
+        setTimeout(() => {
+            practiceView.classList.remove('view-hidden');
+            practiceView.classList.add('view-visible');
+        }, 20);
+    }, 300);
+
+    // Llenar datos
+    const badgeClass = `badge-${tw.dificultad}`;
+    document.getElementById('practiceBadge').innerHTML = `
+        <span class="badge ${badgeClass}">${tw.dificultad}</span>
+        <span class="text-xs font-semibold ml-2" style="color: var(--fg-muted);">Sonido clave: ${tw.sonido}</span>
+    `;
+    document.getElementById('practiceText').textContent = tw.texto;
+    document.getElementById('hintBox').classList.add('hidden');
+    document.getElementById('resultsPanel').classList.add('hidden');
+
+    // Reset progreso circular
+    document.getElementById('scoreProgress').style.strokeDashoffset = '490';
+    document.getElementById('scoreNum').textContent = '0';
+}
+
+function goBack() {
+    const selectorView = document.getElementById('selectorView');
+    const practiceView = document.getElementById('practiceView');
+
+    // Si está grabando, detener
+    if (state.isRecording) {
+        state.isRecording = false;
+        try { state.recognition.stop(); } catch(e) {}
+        stopWaveform();
+        if (state.mediaStream) {
+            state.mediaStream.getTracks().forEach(t => t.stop());
+            state.mediaStream = null;
+        }
+        clearTimeout(state.recTimeout);
+        document.getElementById('recBtn').classList.remove('recording');
+        document.getElementById('recIcon').className = 'fas fa-microphone';
+        document.getElementById('recRings').classList.remove('recording');
+    }
+
+    speechSynthesis.cancel();
+
+    practiceView.classList.remove('view-visible');
+    practiceView.classList.add('view-hidden');
+
+    setTimeout(() => {
+        practiceView.style.display = 'none';
+        selectorView.style.display = 'block';
+        setTimeout(() => {
+            selectorView.classList.remove('view-hidden');
+            selectorView.classList.add('view-visible');
+        }, 20);
+    }, 300);
+
+    state.selectedTW = null;
+    renderGrid();
+}
+
+// ============================================================
+// SIGUIENTE TRABALENGUAS
+// ============================================================
+function nextTrabalenguas() {
+    if (!state.selectedTW) return;
+    const sameDifficulty = trabalenguas.filter(tw => tw.dificultad === state.selectedTW.dificultad);
+    const currentIndex = sameDifficulty.findIndex(tw => tw.id === state.selectedTW.id);
+    const nextIndex = (currentIndex + 1) % sameDifficulty.length;
+
+    speechSynthesis.cancel();
+    document.getElementById('resultsPanel').classList.add('hidden');
+
+    selectTW(sameDifficulty[nextIndex]);
+}
+
+// ============================================================
+// INICIALIZACIÓN
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Cargar voces para síntesis
+    if ('speechSynthesis' in window) {
+        speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+    }
+
+    initRecognition();
+    renderGrid();
+
+    // Pestañas de dificultad
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            state.currentTab = btn.dataset.tab;
+            renderGrid();
         });
     });
 
-    document.getElementById('exportBtn').addEventListener('click', () => {
-        if (!regs.length) { toast('No hay datos para exportar', 'err'); return; }
-        const h = 'Nombre,Apellido,Tipo Documento,Documento,ID Free Fire,Fecha Registro\n';
-        const rows = regs.map(r =>
-            `"${r.nombre}","${r.apellido}","${r.docType === 'cedula' ? 'Cedula' : 'Fecha Nacimiento'}","${r.docValue}","${r.gameId}","${new Date(r.timestamp).toLocaleString('es-CO')}"`
-        ).join('\n');
-        const blob = new Blob(['\uFEFF' + h + rows], { type: 'text/csv;charset=utf-8;' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `torneo_freefire_${new Date().toISOString().slice(0, 10)}.csv`;
-        a.click();
-        toast('Archivo CSV descargado', 'ok');
+    // Botón escuchar
+    document.getElementById('listenBtn').addEventListener('click', () => {
+        if (state.selectedTW) speakText(state.selectedTW.texto);
     });
 
-    document.getElementById('savePassBtn').addEventListener('click', () => {
-        const v = document.getElementById('newPass').value;
-        if (!v || v.length < 4) { toast('Minimo 4 caracteres', 'err'); return; }
-        adminPwd = v;
-        localStorage.setItem('ff_pwd', adminPwd);
-        document.getElementById('newPass').value = '';
-        toast('Contrasena actualizada', 'ok');
+    // Botón pista
+    document.getElementById('hintBtn').addEventListener('click', () => {
+        const hintBox = document.getElementById('hintBox');
+        if (hintBox.classList.contains('hidden')) {
+            hintBox.classList.remove('hidden');
+            hintBox.innerHTML = `<i class="fas fa-lightbulb mr-2"></i>${state.selectedTW.pista}`;
+        } else {
+            hintBox.classList.add('hidden');
+        }
     });
 
-    // ============================================================
-    // CONFIRM
-    // ============================================================
-    let confirmCb = null;
-    function showConfirm(title, msg, cb) {
-        document.getElementById('confirmTitle').textContent = title;
-        document.getElementById('confirmMsg').textContent = msg;
-        document.getElementById('confirmOverlay').classList.add('vis');
-        confirmCb = cb;
-    }
-    function closeConfirm() { document.getElementById('confirmOverlay').classList.remove('vis'); confirmCb = null; }
-    document.getElementById('confirmCancel').addEventListener('click', closeConfirm);
-    document.getElementById('confirmOk').addEventListener('click', () => { if (confirmCb) confirmCb(); closeConfirm(); });
-    document.getElementById('confirmOverlay').addEventListener('click', e => { if (e.target === document.getElementById('confirmOverlay')) closeConfirm(); });
+    // Botón grabar
+    document.getElementById('recBtn').addEventListener('click', () => {
+        if (state.isRecording) {
+            // Detener manualmente
+            state.isRecording = false;
+            clearTimeout(state.recTimeout);
+            try { state.recognition.stop(); } catch(e) {}
+            stopWaveform();
+            if (state.mediaStream) {
+                state.mediaStream.getTracks().forEach(t => t.stop());
+                state.mediaStream = null;
+            }
+            document.getElementById('recBtn').classList.remove('recording');
+            document.getElementById('recIcon').className = 'fas fa-microphone';
+            document.getElementById('recRings').classList.remove('recording');
 
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeSuc(); closeAdmin(); closeConfirm(); } });
+            setTimeout(() => processResult(), 500);
+        } else {
+            startCountdown();
+        }
+    });
 
-    // ============================================================
-    // INIT
-    // ============================================================
-    updateCount();
-    renderRecent();
-    </script>
+    // Botón volver
+    document.getElementById('backBtn').addEventListener('click', goBack);
+
+    // Botón reintentar
+    document.getElementById('retryBtn').addEventListener('click', () => {
+        document.getElementById('resultsPanel').classList.add('hidden');
+        document.getElementById('scoreProgress').style.strokeDashoffset = '490';
+        document.getElementById('scoreNum').textContent = '0';
+    });
+
+    // Botón siguiente
+    document.getElementById('nextTwBtn').addEventListener('click', nextTrabalenguas);
+});
+</script>
 </body>
 </html>
